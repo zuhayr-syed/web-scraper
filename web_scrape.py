@@ -49,7 +49,15 @@ else:
             main_parent = item.find_parent(class_='item-container')
             price = main_parent.find(class_='price-current').strong.string
             
-            itemsList[item] = {"price": price, "link": link}
-    print(itemsList)
+            itemsList[item] = {'price': price, 'link': link}
 
+    # sort dictionary based on price
+    sorted_items = sorted(itemsList.items(), key=lambda x: x[1]['price'])
+    
+    for item in sorted_items:
+        print(item[0])
+        print(f"${item[1]['price']}")
+        print(item[1]['link'])
+        print(printLine)
+    
     
