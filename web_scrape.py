@@ -47,9 +47,12 @@ else:
             link = parent['href']
             
             main_parent = item.find_parent(class_='item-container')
-            price = main_parent.find(class_='price-current').strong.string
+            price = main_parent.find(class_='price-current')
+            dollar = price.strong.string
+            cent = price.sup.string
+            total = dollar + cent
             
-            itemsList[item] = {'price': price, 'link': link}
+            itemsList[item] = {'price': total, 'link': link}
 
     # sort dictionary based on price
     sorted_items = sorted(itemsList.items(), key=lambda x: x[1]['price'])
