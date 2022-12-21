@@ -2,11 +2,14 @@ from bs4 import BeautifulSoup
 import requests
 import re
 from decimal import Decimal
+import csv
 
 """
 Define const and functions
 """
+# const
 printLine = '-------------------------------------------------------------------------------------------------------'
+rowTitle = ['Name', 'Price', 'Shipping Price', 'Total Price', 'Link']
 # makes get request to page 
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'}
 def extract(page):
@@ -96,3 +99,6 @@ else:
         print(item[1]['link'])
         print(printLine)
     
+    # create csv file
+    with open(product + '.csv', 'w') as file:
+        writer = csv.writer(file)
