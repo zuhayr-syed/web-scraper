@@ -86,7 +86,7 @@ else:
             itemsList[item] = {'price': sum, 'shipping': shipping, 'total': total, 'link': link}
 
     # sort dictionary based on price
-    sorted_items = sorted(itemsList.items(), key=lambda x: x[1]['price'])
+    sorted_items = sorted(itemsList.items(), key=lambda x: x[1]['total'])
     
     for item in sorted_items:
         print(item[0])
