@@ -88,17 +88,43 @@ else:
     # sort dictionary based on price
     sorted_items = sorted(itemsList.items(), key=lambda x: x[1]['total'])
     
+    csvList = []
+    
     for item in sorted_items:
-        print(item[0])
-        print(f"${item[1]['price']}")
+        csvRow = []
+        
+        name = item[0]
+        print(name)
+        csvRow.append(name)
+        
+        price = f"${item[1]['price']}"
+        print(price)
+        csvRow.append(price)
+        
         if str(item[1]['shipping'])[0].isdigit():
-            print(f"${item[1]['shipping']}.00")
+            shipping = f"${item[1]['shipping']}.00"
+            print(shipping)
+            csvRow.append(shipping)
         else:
-            print(item[1]['shipping'])
-        print(f"${item[1]['total']}")
-        print(item[1]['link'])
+            shipping = item[1]['shipping']
+            print(shipping)
+            csvRow.append(shipping)
+        
+        total = f"${item[1]['total']}"
+        print(total)
+        csvRow.append(total)
+        
+        link = item[1]['link']
+        print(link)
+        csvRow.append(link)
+        
         print(printLine)
+        csvList.append(csvRow)
     
     # create csv file
     with open(product + '.csv', 'w') as file:
         writer = csv.writer(file)
+        
+        writer.writerow(rowTitle)
+        for row in csvList:
+            writer.writerow(row)
