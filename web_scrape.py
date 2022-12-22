@@ -9,7 +9,7 @@ Define const and functions
 """
 # const
 printLine = '-------------------------------------------------------------------------------------------------------'
-rowTitle = ['Name', 'Price', 'Shipping Price', 'Total Price', 'Link']
+rowTitle = ['Name', 'Price', 'Shipping Price', 'Total Price', 'Rating', 'Link']
 # makes get request to page 
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'}
 def extract(page):
@@ -83,7 +83,12 @@ else:
                 if not centFormat.__contains__('.'):
                     total = str(total) + '.00'
             
-            itemsList[item] = {'price': sum, 'shipping': shipping, 'total': total, 'link': link}
+            ratingParent = main_parent.find(class_='item-rating')
+            rating = ""
+            if ratingParent != None:
+                rating = ratingParent.i['aria-label'][6:-9] + '/5'
+            
+            itemsList[item] = {'price': sum, 'shipping': shipping, 'total': total, 'rating': rating, 'link': link}
 
     # sort dictionary based on price
     sorted_items = sorted(itemsList.items(), key=lambda x: x[1]['total'])
@@ -113,6 +118,10 @@ else:
         total = f"${item[1]['total']}"
         print(total)
         csvRow.append(total)
+        
+        rating = item[1]['rating']
+        print(rating)
+        csvRow.append(rating)
         
         link = item[1]['link']
         print(link)
