@@ -36,6 +36,8 @@ if error:
 else:
     print('\n' + printLine + '\n' + 'LOADING RESULTS...' + '\n' + printLine + '\n')
     
+    itemsList = {}
+
     # find number of pages
     page_text = doc.find(class_='list-tool-pagination-text').strong.text
     pages = int(page_text[2])
@@ -45,8 +47,6 @@ else:
         
         # find items that contain the search in name using regular expression
         items = div.find_all(text=re.compile(product))
-
-        itemsList = {}
 
         for item in items:
             parent = item.parent
@@ -82,6 +82,8 @@ else:
                 centFormat = str(total)[-3:]
                 if not centFormat.__contains__('.'):
                     total = str(total) + '.00'
+                else:
+                    total = str(total)
             
             ratingParent = main_parent.find(class_='item-rating')
             rating = ""
