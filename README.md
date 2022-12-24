@@ -1,5 +1,5 @@
-# web-scraper
+# Web Scraper
 
-Created using Python and Beautiful Soup package
+Created using Python and the Beautiful Soup package
 
  - Outputs scraped data to new csv file and console
